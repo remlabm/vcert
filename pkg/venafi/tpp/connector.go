@@ -207,21 +207,12 @@ func (c *Connector) RefreshAccessToken(auth *endpoint.Authentication) (resp Oaut
 }
 
 // Revoke OAuth access token
-func (c *Connector) RevokeAccessToken(auth *endpoint.Authentication) (string, err error) {
-
-	if auth == nil {
-		return nil, fmt.Errorf("failed to authenticate: missing credentials")
-	}
-
-	if auth.ClientId == "" {
-		auth.ClientId = defaultClientID
-	}
-
+func (c *Connector) RevokeAccessToken() (string, err error) {
 	statusCode, status, _, err := c.request("GET", urlResourceRevokeAccessToken, "")
 	if err != nil {
 		return nil, err
 	}
-	//Put in hint for authentication scope 'configuration'
+
 	switch statusCode {
 	case 200:
 	case 401:

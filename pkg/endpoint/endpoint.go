@@ -76,6 +76,7 @@ type Connector interface {
 	Ping() (err error)
 	// Authenticate is usually called by NewClient and it is not required that you manually call it.
 	Authenticate(auth *Authentication) (err error)
+	RevokeAccessToken() (err error)
 	// ReadPolicyConfiguration returns information about zone policies. It can be used for checking request compatibility with policies.
 	ReadPolicyConfiguration() (policy *Policy, err error)
 	// ReadZoneConfiguration returns the zone configuration. A zone configuration includes zone policy and additional zone information.
