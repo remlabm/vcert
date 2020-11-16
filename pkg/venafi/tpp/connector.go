@@ -206,6 +206,32 @@ func (c *Connector) RefreshAccessToken(auth *endpoint.Authentication) (resp Oaut
 	}
 }
 
+// Revoke OAuth access token
+func (c *Connector) RevokeAccessToken(auth *endpoint.Authentication) (string, err error) {
+
+	if auth == nil {
+		return nil, fmt.Errorf("failed to authenticate: missing credentials")
+	}
+
+	if auth.ClientId == "" {
+		auth.ClientId = defaultClientID
+	}
+
+	statusCode, status, _, err := c.request("GET", urlResourceRevokeAccessToken, "")
+	if err != nil {
+		return nil, err
+	}
+	//Put in hint for authentication scope 'configuration'
+	switch statusCode {
+	case 200:
+	case 401:
+		return nil, fmt.Errorf("http status code '%s' was returned by the server", status)
+	default:
+		return nil, fmt.Errorf("unexpected http status code while revoking access token. %s", status)
+	}
+	return
+}
+
 func processAuthData(c *Connector, url urlResource, data interface{}) (resp interface{}, err error) {
 
 	statusCode, status, body, err := c.request("POST", url, data)

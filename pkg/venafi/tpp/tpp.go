@@ -292,6 +292,7 @@ const (
 	urlResourceConfigReadDn           urlResource = "vedsdk/Config/ReadDn"
 	urlResourceFindPolicy             urlResource = "vedsdk/config/findpolicy"
 	urlResourceRefreshAccessToken     urlResource = "vedauth/authorize/token" // #nosec
+	urlResourceRevokeAccessToken      urlResource = "vedauth/revoke/token"    // #nosec
 	urlResourceMetadataSet            urlResource = "vedsdk/metadata/set"
 	urlResourceAllMetadataGet         urlResource = "vedsdk/metadata/getitems"
 	urlResourceMetadataGet            urlResource = "vedsdk/metadata/get"
